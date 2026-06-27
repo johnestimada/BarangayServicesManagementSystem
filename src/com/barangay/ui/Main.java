@@ -47,7 +47,7 @@ public class Main {
                         sc.nextLine();
                         System.out.print("Enter address (optional, press Enter to skip): ");
                         String address = sc.nextLine();
-                        Resident r = address.isEmpty() ? new Resident(name, age) : new Resident(name, age, address);
+                        Resident r = address.isEmpty() ? new Resident(name, age) : new Resident(name, age);
                         residentService.registerResident(r);
                         logs.add(new TransactionLog("Registered resident: " + r));
                     }
