@@ -1,4 +1,3 @@
-
 package com.barangay.models;
 
 public class Clerk extends Staff {

@@ -1,4 +1,3 @@
-
 package com.barangay.models;
 
 public class DocumentRequest extends BarangayService {
