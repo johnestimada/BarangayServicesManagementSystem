@@ -32,9 +32,7 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    System.out.println("=== Resident Registration Menu ===");
-                    System.out.println("1. Register New Resident");
-                    System.out.println("2. Back to Main Menu");
+                    MenuNavigator.showResidentMenu();
                     int resChoice = sc.hasNextInt() ? sc.nextInt() : -1;
                     sc.nextLine();
                     if (resChoice == 1) {
@@ -47,17 +45,16 @@ public class Main {
                         System.out.print("Enter age: ");
                         int age = sc.hasNextInt() ? sc.nextInt() : 0;
                         sc.nextLine();
-                        Resident r = new Resident(name, age);
+                        System.out.print("Enter address (optional, press Enter to skip): ");
+                        String address = sc.nextLine();
+                        Resident r = address.isEmpty() ? new Resident(name, age) : new Resident(name, age, address);
                         residentService.registerResident(r);
                         logs.add(new TransactionLog("Registered resident: " + r));
                     }
                     break;
 
                 case 2:
-                    System.out.println("=== Document Request Dispatcher Menu ===");
-                    System.out.println("1. Document Request");
-                    System.out.println("2. Clearance Request");
-                    System.out.println("3. Back to Main Menu");
+                    MenuNavigator.showRequestMenu();
                     int reqChoice = sc.hasNextInt() ? sc.nextInt() : -1;
                     sc.nextLine();
                     if (reqChoice == 1) {
@@ -72,10 +69,7 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("=== Payment Simulation Menu ===");
-                    System.out.println("1. Cash Payment");
-                    System.out.println("2. GCash Payment");
-                    System.out.println("3. Back to Main Menu");
+                    MenuNavigator.showPaymentMenu();
                     int payChoice = sc.hasNextInt() ? sc.nextInt() : -1;
                     sc.nextLine();
                     if (payChoice == 1) {
@@ -111,12 +105,12 @@ public class Main {
                     break;
 
                 case 5:
-                    System.out.println("=== Residents ===");
+                    System.out.println("=== Resident List ===");
                     residentService.getAllResidents().forEach(System.out::println);
                     break;
 
                 case 6:
-                    System.out.println("=== Requests ===");
+                    System.out.println("=== Requests List ===");
                     dispatcher.getRequests().forEach(System.out::println);
                     break;
 
@@ -151,11 +145,11 @@ public class Main {
 
                 case 10:
                     running = false;
-                    System.out.println("Exiting system Program, thank you!");
+                    System.out.println("Exiting system...");
                     break;
 
                 default:
-                    System.out.println("Invalid choice, please try again.");
+                    System.out.println("Invalid choice.");
             }
         }
         sc.close();
