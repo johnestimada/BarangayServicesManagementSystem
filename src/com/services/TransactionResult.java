@@ -11,5 +11,17 @@ public class TransactionResult<T> {
         this.message = message;
     }
 
+    public boolean isSuccess() { return success; }
+    public T getData() { return data; }
+    public String getMessage() { return message; }
+
+    @Override
+    public String toString() {
+        return "TransactionResult{" +
+                "success=" + success +
+                ", data=" + data +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
 
