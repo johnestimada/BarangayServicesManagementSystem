@@ -11,15 +11,10 @@ public class Resident implements Comparable<Resident> {
         this.address = "";
     }
 
-    public Resident(String name, int age, String address) {
-        this.name = name;
-        this.age = age;
-        this.address = address;
-    }
+   
 
     public String getName() { return name; }
     public int getAge() { return age; }
-    public String getAddress() { return address; }
 
 
     public void setName(String name) { this.name = name; }
@@ -28,7 +23,7 @@ public class Resident implements Comparable<Resident> {
 
     @Override
     public String toString() {
-        return "Resident{name='" + name + "', age=" + age + ", address='" + address + "'}";
+        return "Resident{name='" + name + "', age=" + age + ", '" + address + "'}";
     }
 
     @Override
