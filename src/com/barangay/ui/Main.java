@@ -57,14 +57,39 @@ public class Main {
                     MenuNavigator.showRequestMenu();
                     int reqChoice = sc.hasNextInt() ? sc.nextInt() : -1;
                     sc.nextLine();
-                    if (reqChoice == 1) {
-                        DocumentRequest d = new DocumentRequest();
-                        dispatcher.addRequest(d);
-                        logs.add(new TransactionLog("Document request created"));
-                    } else if (reqChoice == 2) {
-                        ClearanceRequest c = new ClearanceRequest();
-                        dispatcher.addRequest(c);
-                        logs.add(new TransactionLog("Clearance request created"));
+
+                    if (reqChoice == 1) { // Document Request
+                        if (!residentService.getAllResidents().isEmpty()) {
+                            System.out.println("Select resident by name: ");
+                            String resName = sc.nextLine();
+                            Resident found = residentService.searchByName(resName);
+                            if (found != null) {
+                                DocumentRequest d = new DocumentRequest(found);
+                                dispatcher.addRequest(d);
+                                logs.add(new TransactionLog("Document request created by " + found.getName()));
+                            } else {
+                                System.out.println("Resident not found.");
+                            }
+                        } else {
+                            System.out.println("No residents registered yet.");
+                        }
+                    }
+
+                    else if (reqChoice == 2) {
+                        if (!residentService.getAllResidents().isEmpty()) {
+                            System.out.println("Select resident by name: ");
+                            String resName = sc.nextLine();
+                            Resident found = residentService.searchByName(resName);
+                            if (found != null) {
+                                ClearanceRequest c = new ClearanceRequest(found);
+                                dispatcher.addRequest(c);
+                                logs.add(new TransactionLog("Clearance request created by " + found.getName()));
+                            } else {
+                                System.out.println("Resident not found.");
+                            }
+                        } else {
+                            System.out.println("No residents registered yet.");
+                        }
                     }
                     break;
 
@@ -121,11 +146,17 @@ public class Main {
 
                 case 8:
                     if (!dispatcher.getRequests().isEmpty()) {
-                        dispatcher.getRequests().forEach(req -> {
-                            req.setStatus("Approved");
-                            System.out.println("Approved: " + req.getServiceName());
-                        });
-                        logs.add(new TransactionLog("Admin approved requests"));
+                        System.out.println("Do you want to approve all requests? (Y/N): ");
+                        String confirm = sc.nextLine().trim().toUpperCase();
+                        if (confirm.equals("Y")) {
+                            dispatcher.getRequests().forEach(req -> {
+                                req.setStatus("Approved");
+                                System.out.println("Approved: " + req.getServiceName());
+                            });
+                            logs.add(new TransactionLog("Admin approved requests"));
+                        } else {
+                            System.out.println("Approval cancelled.");
+                        }
                     } else {
                         System.out.println("No requests to approve.");
                     }

@@ -4,19 +4,13 @@ import java.util.Objects;
 
 public abstract class BarangayService {
     protected String serviceName;
-    protected String status = "Pending";
+    protected String status;
 
-    public String getServiceName() {
-        return serviceName;
-    }
+    public String getServiceName() {return serviceName;}
+    public void setServiceName(String serviceName) {this.serviceName = serviceName;}    
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getStatus() {return status;}
+    public void setStatus(String status) {this.status = status;}
 
     public abstract void process();
 

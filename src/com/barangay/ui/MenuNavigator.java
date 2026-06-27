@@ -7,7 +7,7 @@ public class MenuNavigator {
         System.out.println("1. Resident Registration Menu");
         System.out.println("2. Document Request Dispatcher Menu");
         System.out.println("3. Payment Simulation Menu");
-        System.out.println("4. Service Lifecycle Tracking");
+        System.out.println("4. Lifecycle Tracking Menu");
         System.out.println("5. View Residents");
         System.out.println("6. View Requests");
         System.out.println("7. View Transaction Logs");
@@ -35,4 +35,5 @@ public class MenuNavigator {
         System.out.println("2. GCash Payment");
         System.out.println("3. Back to Main Menu");
     }
+
 }
